@@ -103,6 +103,7 @@ PUBLISHED:
     M_param,
     M_texture_image,
     M_buffer,
+    M_int_vector,
   };
 
   INLINE operator bool() const;
@@ -117,6 +118,7 @@ PUBLISHED:
   INLINE int get_value_type() const;
   INLINE int get_priority() const;
   INLINE const LVecBase4 &get_vector() const;
+  INLINE const LVecBase4i &get_int_vector() const;
   INLINE const Shader::ShaderPtrData &get_ptr() const;
 
   NodePath get_nodepath() const;
@@ -132,7 +134,10 @@ public:
   static void register_with_read_factory();
 
 private:
-  LVecBase4 _stored_vector;
+  union {
+    LVecBase4 _stored_vector;
+    LVecBase4i _stored_int_vector;
+  };
   Shader::ShaderPtrData _stored_ptr;
   CPT_InternalName _name;
   PT(TypedWritableReferenceCount) _value;

@@ -80,6 +80,9 @@ add_hash(size_t hash) const {
   case M_numeric:
     return pointer_hash::add_hash(hash, _stored_ptr._ptr);
 
+  case M_int_vector:
+    return _stored_int_vector.add_hash(hash);
+
   default:
     return pointer_hash::add_hash(hash, _value);
   }

@@ -443,6 +443,9 @@ operator == (const ShaderInput &other) const {
   case M_numeric:
     return _stored_ptr._ptr == other._stored_ptr._ptr;
 
+  case M_int_vector:
+    return _stored_int_vector == other._stored_int_vector;
+
   default:
     return _value == other._value;
   }
@@ -465,6 +468,9 @@ operator != (const ShaderInput &other) const {
 
   case M_numeric:
     return _stored_ptr._ptr != other._stored_ptr._ptr;
+
+  case M_int_vector:
+    return _stored_int_vector != other._stored_int_vector;
 
   default:
     return _value != other._value;
@@ -507,6 +513,21 @@ operator < (const ShaderInput &other) const {
   case M_numeric:
     return _stored_ptr._ptr < other._stored_ptr._ptr;
 
+  case M_int_vector:
+    if (_stored_int_vector[0] != other._stored_int_vector[0]) {
+      return _stored_int_vector[0] < other._stored_int_vector[0];
+    }
+    if (_stored_int_vector[1] != other._stored_int_vector[1]) {
+      return _stored_int_vector[1] < other._stored_int_vector[1];
+    }
+    if (_stored_int_vector[2] != other._stored_int_vector[2]) {
+      return _stored_int_vector[2] < other._stored_int_vector[2];
+    }
+    if (_stored_int_vector[3] != other._stored_int_vector[3]) {
+      return _stored_int_vector[3] < other._stored_int_vector[3];
+    }
+    return false;
+
   default:
     return _value < other._value;
   }
@@ -542,6 +563,14 @@ get_priority() const {
 INLINE const LVecBase4 &ShaderInput::
 get_vector() const {
   return _stored_vector;
+}
+
+/**
+ *
+ */
+INLINE const LVecBase4i &ShaderInput::
+get_int_vector() const {
+  return _stored_int_vector;
 }
 
 /**

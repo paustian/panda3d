@@ -376,6 +376,9 @@ get_shader_input_vector(InternalName *id) const {
         }
       }
 
+    } else if (p.get_value_type() == ShaderInput::M_int_vector) {
+      return LCAST(PN_stdfloat, p.get_int_vector());
+
     } else if (p.get_value_type() == ShaderInput::M_param) {
       // Temporary solution until the new param system
       TypedWritableReferenceCount *param = p.get_value();
@@ -405,7 +408,8 @@ get_shader_input_ptr(const InternalName *id) const {
   if (i != _inputs.end()) {
     const ShaderInput &p = (*i).second;
     if (p.get_value_type() != ShaderInput::M_numeric &&
-        p.get_value_type() != ShaderInput::M_vector) {
+        p.get_value_type() != ShaderInput::M_vector &&
+        p.get_value_type() != ShaderInput::M_int_vector) {
       ostringstream strm;
       strm << "Shader input " << id->get_name() << " is not a PTA(float/double) type.\n";
       nassert_raise(strm.str());
@@ -430,7 +434,8 @@ get_shader_input_ptr(const InternalName *id, Shader::ShaderPtrData &data) const 
   if (i != _inputs.end()) {
     const ShaderInput &p = (*i).second;
     if (p.get_value_type() == ShaderInput::M_numeric ||
-        p.get_value_type() == ShaderInput::M_vector) {
+        p.get_value_type() == ShaderInput::M_vector ||
+        p.get_value_type() == ShaderInput::M_int_vector) {
 
       data = p.get_ptr();
       return (data._ptr != nullptr);
