@@ -12,6 +12,7 @@ the AppRunner at startup.
 """
 import warnings
 if __debug__:
+    import warnings
     warnings.warn("AppRunner has been removed and AppRunnerGlobal has been deprecated.", DeprecationWarning, stacklevel=2)
 
 #: Contains the global :class:`~.AppRunner.AppRunner` instance, or None

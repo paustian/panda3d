@@ -12,6 +12,7 @@ import io
 import distutils.sysconfig as sysconf
 import zipfile
 import importlib
+import warnings
 
 from . import pefile
 import warnings

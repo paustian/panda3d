@@ -61,7 +61,7 @@ class ForceGroup(DirectObject):
 
     # Get/set
     def getName(self):
-        warings.warn("Deprecated: access .name directly instead.", DeprecationWarning, stacklevel=2)
+        warnings.warn("Deprecated: access .name directly instead.", DeprecationWarning, stacklevel=2)
         return self.name
 
     def getNode(self):
